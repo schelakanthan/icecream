@@ -1,7 +1,7 @@
 const Users = require('../models/userModel')//Schema
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
-
+const Payments = require('../models/paymentModel')
 
 const userCtrl = {
     signup: async (req,res) =>{
@@ -65,13 +65,12 @@ const userCtrl = {
         }
     },
 
-    logout: async (_req,res) =>{
+    logout: async (_req, res) =>{
         try {
-            res.clearCookie('refreshtoken',{ path:'/user/refresh_token'})
-            return res.status(400).json("Logged out sucessfull")
-            
+            res.clearCookie('refreshtoken', {path: '/user/refresh_token'})
+            return res.json({msg: "Logged out"})
         } catch (err) {
-            return res.status(500).json({msg:err.message})
+            return res.status(500).json({msg: err.message})
         }
     },
 
@@ -79,6 +78,7 @@ const userCtrl = {
     refreshToken: (req,res) =>{
         try {
         const rf_token = req.cookies.refreshtoken;
+        
         if(!rf_token) return res.status(400).json({msg:"Please login"})
        
         jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET,(err,user) =>{
@@ -93,16 +93,24 @@ const userCtrl = {
             return res.status(500).json({msg:err.message})
         }
     },
-    getUser: async (req,res) =>{
+    getUser: async (req, res) =>{
         try {
             const user = await Users.findById(req.user.id).select('-password')
-            if(!user) return res.status(400).json({mag:"User is not found"})
+            if(!user) return res.status(400).json({msg: "User does not exist."})
 
             res.json(user)
-            
         } catch (err) {
-            res.status(500).json({msg:err.message})
-            
+            return res.status(500).json({msg: err.message})
+        }
+    },
+    getUsers: async (_req, res) =>{
+        try {
+           
+        const user = await Users.find()
+
+            res.json(user)
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
         }
     },
     addCart: async (req, res) =>{
@@ -129,8 +137,6 @@ const userCtrl = {
         }
     }
  }
-
-
 
 
 

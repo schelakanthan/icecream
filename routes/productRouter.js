@@ -7,7 +7,7 @@ router.route('/products')
 
 
 router.route('/product/:id')
-    .delete(product.deleteProducts)
-    .put(product.updateProducts)
+    .delete(product.deleteProduct)
+    .put(product.updateProduct)
 
 module.exports = router

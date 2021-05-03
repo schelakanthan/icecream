@@ -1,12 +1,12 @@
 {
-  "name": "r7-tamil",
+  "name": "zujans",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
-  "author": "Rosan",
+  "author": "Zujans",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
@@ -26,5 +26,18 @@
     "nodemon": "^2.0.7",
     "react-paypal-express-checkout": "^1.0.5",
     "react-router-dom": "^5.2.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schelakanthan/icecream.git"
+  },
+  "bugs": {
+    "url": "https://github.com/schelakanthan/icecream/issues"
+  },
+  "homepage": "https://github.com/schelakanthan/icecream#readme",
+  "keywords": [
+    "\\"
+  ],
+  "description": ""
 }

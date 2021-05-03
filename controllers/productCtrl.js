@@ -23,7 +23,7 @@ class APIfeatures {
     sorting() { }
     paginating() {
         const page = this.queryString.page * 1 || 1
-        const limit = this.queryString.limit * 1 || 9
+        const limit = this.queryString.limit * 1 || 21
         const skip = (page - 1) * limit;
         this.query = this.query.skip(skip).limit(limit)
         return this
@@ -81,7 +81,7 @@ const product = {
 
         }
     },
-    deleteProducts: async (req, res) => {
+    deleteProduct: async (req, res) => {
         try {
             await Products.findByIdAndDelete(req.params.id)
             res.json({ mag: "Product Deleted" })
@@ -91,7 +91,7 @@ const product = {
 
         }
     },
-    updateProducts: async (req, res) => {
+    updateProduct: async (req, res) => {
         try {
             const { name, price, description, flavor1, flavor2, flavor3, flavor4, images } = req.body;
             if (!images) return res.status(400).json({ msg: "No image upload" })
